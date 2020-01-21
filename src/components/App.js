@@ -1,13 +1,19 @@
-import React from 'react';
+import React, { Component } from 'react';
 import SearchBox from './searchBox';
 import './weather.css';
 
-function App() {
-  return (
-    <div className="ui weather-container">
-      <SearchBox/>
-    </div>
-  );
+class App extends Component {
+  onSearchSubmit = term =>{
+    console.log(term);
+  }
+  render() {
+    return (
+      <div className="ui weather-container">
+        <SearchBox
+          onSubmit={this.onSearchSubmit}/>
+      </div>
+    );
+  }
 }
 
 export default App;
