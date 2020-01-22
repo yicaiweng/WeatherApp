@@ -5,17 +5,17 @@ import geocoding from '../api/geocoding';
 
 class App extends Component {
   state = {city: {}};
-  onSearchSubmit = async term =>{
 
+  onSearchSubmit = async term =>{
     const response = await geocoding
       .get('maps/api/geocode/json', {
         params: {
           address: term,
-          key: 'AIzaSyBVNOHKX6EhL9NotrttjfN-57SreSwRoZg'
+          key: process.env.REACT_APP_GEOCODING_API
         },
       })
         this.setState({city: response.data.results});
-        console.log(this.state.city);
+        console.log(this.state);
         console.log(this.state.city[0].geometry.location);
   }
 
