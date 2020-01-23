@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import SearchBox from './searchBox';
-import './weather.css';
-// import geocoding from '../api/geocoding';
 import axios from 'axios';
+import './weather.css';
+import WeatherDetail from './weatherDetail';
+import Spinner from './spinner';
 
 class App extends Component {
   state = {city: [], forecast: []};
@@ -39,12 +40,22 @@ class App extends Component {
       })
   }
 
+  renderContent() {
+    return <Spinner message="Loading Data"/>
+  }
+
   render() {
     return (
       <div className="ui weather-container">
+        <div>
         <SearchBox
           onSubmit={this.onSearchSubmit}/>
-      </div>
+        </div>
+          <div>
+          <WeatherDetail city={this.state.forecast.city_name}/>
+          </div>
+      </div> 
+
     );
   }
 }
