@@ -4,6 +4,7 @@ import axios from 'axios';
 import './weather.css';
 import WeatherDetail from './weatherDetail';
 import Spinner from './spinner';
+import WeatherCard from './weatherCard';
 
 class App extends Component {
   state = {city: [], forecast: []};
@@ -19,7 +20,6 @@ class App extends Component {
         console.log(this.state.city)
         let lat = this.state.city.geometry.location.lat;
         let lon = this.state.city.geometry.location.lng;
-        // https://api.weatherbit.io/v2.0/current?city=Raleigh,NC&key=API_KEY
 
         axios.get('https://api.weatherbit.io/v2.0/forecast/daily', {
           params: {
@@ -51,9 +51,13 @@ class App extends Component {
         <SearchBox
           onSubmit={this.onSearchSubmit}/>
         </div>
-          <div>
-          <WeatherDetail city={this.state.forecast.city_name}/>
-          </div>
+        {/* { this.state.forecast.city_name ?  */}
+        <div className="weather-city">
+            <WeatherDetail city={this.state.forecast.city_name}/>
+        </div>
+        {/* : */}
+          <div></div>
+        {/* } */}
       </div> 
 
     );
