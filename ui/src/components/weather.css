@@ -6,3 +6,13 @@
 .weather-input {
     width: 95%;
 }
+
+.weatherCard-container {
+    border: 1px solid black;
+    width: 25%;
+}
+
+.icon{
+    width: 10px;
+    display: inline-block;
+}
