@@ -7,12 +7,60 @@
     width: 95%;
 }
 
+.weather-city {
+    margin-top: 5%;
+    font-size: 18px;
+}
+
+.weather-detail {
+    margin-top: 5%;
+    text-align: left;
+}
+
+/* weather card */
 .weatherCard-container {
-    border: 1px solid black;
+    border: 1px solid grey;
     width: 25%;
+    min-height: 20em;
+    background: #5F9AE0;
+    color: white;
+    vertical-align: auto;
+}
+
+.weatherCard-iconContainer {
+    margin-top: 15%;
+}
+
+.weatherCard-temp {
+    margin-top: 10%;
+    font-size: 40px;
+}
+
+.weatherCard-pop {
+    margin-top: 10%;
+}
+
+.weatherCard-date {
+    margin-top: 15%;
+    font-size: 16px;
+}
+
+.weatherCard-detail.weatherCard-detail {
+    margin-top: 5%;
+    text-align: left;
+    width: 100%;
+}
+
+.weatherCard-row {
+    display: inline-flex;
 }
 
 .icon{
     width: 10px;
+    padding-right: 2px;
     display: inline-block;
+}
+
+.weather-icon {
+    width: 30px;
 }

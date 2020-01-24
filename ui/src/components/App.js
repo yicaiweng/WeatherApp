@@ -52,11 +52,8 @@ class App extends Component {
           onSubmit={this.onSearchSubmit}/>
         </div>
         {/* { this.state.forecast.city_name ?  */}
-        <div>
-          <WeatherDetail city={this.state.forecast.city_name}/>
-        </div>
-        <div>
-          <WeatherCard />
+        <div className="weather-city">
+            <WeatherDetail city={this.state.forecast.city_name}/>
         </div>
         {/* : */}
           <div></div>
