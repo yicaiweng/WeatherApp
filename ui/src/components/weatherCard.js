@@ -58,8 +58,11 @@ class WeatherCard extends Component {
         const forecast = this.props.forecasts;
         // const sunraise_time = forecast.sunraise_ts.getDate() + forecast.sunraise_ts.getDay();
         return(
-            <div>
-                <div className="ui weatherCard-container">
+            <div className={this.props.selectedIndex === this.props.index ? "four wide column" : "three wide column"}>
+                <div
+                    className="ui weatherCard-container"
+                    onClick={() => this.props.selectCard(this.props.index)}
+                >
                     <div className="weatherCard-date">
                         <p>{forecast.valid_date}</p>
                         <p>{forecast.weather.description}</p>
