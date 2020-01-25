@@ -5,38 +5,49 @@ import './weather.css';
 import WeatherDetail from './weatherDetail';
 import Spinner from './spinner';
 
+// TODO move centerIndex to Redux and make incr and decr actions with that
 class App extends Component {
-  state = {city: [], forecast: []};
+  constructor(props){
+    super(props)
+    this.state = {
+      city: [],
+      forecast: [],
+      centerIndex: 2
+    };
+
+    // This binding is necessary to make `this` work in the callback
+    this.onSearchSubmit = this.onSearchSubmit.bind(this);
+    this.incrementCarouselIndex = this.incrementCarouselIndex.bind(this);
+    this.decrementCarouselIndex = this.decrementCarouselIndex.bind(this);
+  }
 
   onSearchSubmit = term =>{
-    axios.get('https://maps.googleapis.com/maps/api/geocode/json', {
+    axios.get('http://localhost:4000/getWeather', {
     params: {
-          address: term,
-          key: process.env.REACT_APP_GEOCODING_API
-        },
-      }).then( response => {
-        this.setState({city: response.data.results[0]});
-        console.log(this.state.city)
-        let lat = this.state.city.geometry.location.lat;
-        let lon = this.state.city.geometry.location.lng;
-
-        axios.get('https://api.weatherbit.io/v2.0/forecast/daily', {
-          params: {
-            lat,
-            lon,
-            key: process.env.REACT_APP_WEATHER_API
-          }
-        }).then(res => {
-          this.setState({forecast: res.data})
-          console.log(this.state.forecast);
-        })
-        .catch(err => {
-          console.log(err);
-        })
+          search: term
+        }
+      }).then((response) => {
+        console.log('BFF response: ', response)
+        this.setState({ city: response.data.weatherData.city_name, forecast: response.data.weatherData })
       })
       .catch(err => {
-        console.log(err);
+        console.log(err)
       })
+  }
+
+  incrementCarouselIndex = () => { 
+    if (this.state.centerIndex < 13){
+      let newIndex = this.state.centerIndex + 1;
+      this.setState({centerIndex: newIndex});
+    } 
+  }
+
+
+  decrementCarouselIndex = () => {
+    if (this.state.centerIndex > 2){
+      let newIndex = this.state.centerIndex - 1;
+      this.setState({ centerIndex: newIndex });
+    }
   }
 
   renderContent() {
@@ -53,8 +64,11 @@ class App extends Component {
         { this.state.forecast.city_name ? 
         <div className="weather-city">
             <WeatherDetail 
-            city={this.state.forecast.city_name}
-            forecast={this.state.forecast}
+              city={this.state.forecast.city_name}
+              forecast={this.state.forecast}
+              centerIndex={this.state.centerIndex}
+              incrementCarouselIndex={this.incrementCarouselIndex}
+              decrementCarouselIndex={this.decrementCarouselIndex}
             />
         </div>
         :

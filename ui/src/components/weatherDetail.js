@@ -1,21 +1,26 @@
 import React from 'react';
-import WeatherCard from './weatherCard';
+import WeatherCarousel from './weatherCarousel'
 
 const WeatherDetail = props => {
     if(props.forecast.data) {
-        // console.log(props.forecast.data)
-        const forecasts = props.forecast.data.map((forecast, i) => {
-            return <WeatherCard forecasts={forecast} key={i}/>
-        })
-     
+
         return(
             <div>
                 <p>
                     City Name is: {props.city}
                 </p>
                 <p>Weather in next 16 days</p>
-                <div className="weather-details">
-                    {forecasts}
+                <div className="weather-details ui grid">
+                    <div className="two wide column">
+                        <button className="ui button teal" onClick={props.decrementCarouselIndex}>{'<'}</button>
+                    </div>
+                    <div className="twelve wide column">
+                        <WeatherCarousel centerIndex={props.centerIndex} forecasts={props.forecast.data}/>
+                        
+                    </div>    
+                    <div className="two wide column">
+                        <button className="ui button teal" onClick={props.incrementCarouselIndex}>{'>'}</button>
+                    </div>
                 </div>
             </div>
         )
