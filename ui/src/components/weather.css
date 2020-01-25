@@ -12,19 +12,17 @@
     font-size: 18px;
 }
 
-.weather-detail {
-    margin-top: 5%;
-    text-align: left;
-}
-
 /* weather card */
 .weatherCard-container {
     border: 1px solid grey;
-    width: 25%;
+    width: 20%;
     min-height: 20em;
     background: #5F9AE0;
     color: white;
     vertical-align: auto;
+    float: left;
+    display: grid;
+    margin-bottom: 10px;
 }
 
 .weatherCard-iconContainer {
@@ -49,6 +47,7 @@
     margin-top: 5%;
     text-align: left;
     width: 100%;
+    height: 25em;
 }
 
 .weatherCard-row {
@@ -63,4 +62,8 @@
 
 .weather-icon {
     width: 30px;
+}
+
+.hide.hide {
+    display: none;
 }

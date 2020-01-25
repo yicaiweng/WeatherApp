@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import a01d from '../assets/a01d.png';
 import raindrop from '../assets/raindrop.png';
 import wind from '../assets/wind.png';
 import uv from '../assets/uv.png';
@@ -9,6 +8,10 @@ import sunraise from '../assets/sunraise.png';
 import humidity from '../assets/humidity.png';
 
 class WeatherCard extends Component {
+    constructor(props) {
+        super(props);
+    }
+
     // moonrise_ts: 1579872886
     // wind_cdir: "WNW"
     // rh: 71
@@ -52,27 +55,29 @@ class WeatherCard extends Component {
     // clouds_low: 33
 
     render() {
+        const forecast = this.props.forecasts;
+        // const sunraise_time = forecast.sunraise_ts.getDate() + forecast.sunraise_ts.getDay();
         return(
             <div>
                 <div className="ui weatherCard-container">
                     <div className="weatherCard-date">
-                        <p>10/12</p>
-                        <p>Moderate Rain</p>
+                        <p>{forecast.valid_date}</p>
+                        <p>{forecast.weather.description}</p>
                     </div>
                     <div className="weatherCard-iconContainer">
-                        <img src={a01d} alt="weatherIcon" />
+                        <img src={require(`../assets/${forecast.weather.icon}.png`)} alt="weatherIcon" />
                     </div>
                     <div className="weatherCard-temp">
-                        33°
+                        {forecast.temp}°
                     </div>
                     <div className="weatherCard-pop">
                         <img className="icon" src={raindrop} alt="raindrop" />
-                        25%</div>
+                        {forecast.pop}%</div>
                 </div>
                 
-                <div className="weatherCard-detail ui grid">
+                <div className="weatherCard-detail ui grid hide">
                     <div className="sixteen wide column">
-                        <p>Moderate Rain, Low_Temp, max_temp</p>
+                        <p>{forecast.weather.description}, {forecast.low_temp}, {forecast.max_temp}</p>
                     </div>
                     <div className="four wide column">
                         <div className="weatherCard-row">
@@ -83,7 +88,7 @@ class WeatherCard extends Component {
                                 <b><p>Wind</p></b>
                             </span>
                         </div>
-                        <p>win_cdir, win_spd, m/s</p>
+                        <p>{forecast.wind_cdir},{forecast.wind_spd} m/s</p>
                     </div>
                     <div className="four wide column">
                         <div className="weatherCard-row">
@@ -94,7 +99,7 @@ class WeatherCard extends Component {
                                 <b><p>Humidity</p></b>
                             </span>
                         </div>
-                        <p>rh</p>
+                        <p>{forecast.rh}</p>
                     </div>
 
                     <div className="four wide column">
@@ -106,7 +111,7 @@ class WeatherCard extends Component {
                                 <b><p>uv</p></b>
                             </span>
                         </div>
-                        <p>uv of 10</p>
+                        <p>{forecast.uv} of 10</p>
                     </div>
 
                     <div className="four wide column">
@@ -118,7 +123,7 @@ class WeatherCard extends Component {
                                 <b><p>sun</p></b>
                             </span>
                         </div>
-                        <p><img className="weather-icon" src={sunraise} alt="weather-icon"/> sunrise_ts, <img className="weather-icon" src={sunset} alt="weather-icon" />sunset_ts</p>
+                        <p><img className="weather-icon" src={sunraise} alt="weather-icon"/> {forecast.sunrise_ts}, <img className="weather-icon" src={sunset} alt="weather-icon" />{forecast.sunset_ts}</p>
                     </div>
                 </div>
             </div>

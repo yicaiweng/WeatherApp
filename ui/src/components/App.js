@@ -4,7 +4,6 @@ import axios from 'axios';
 import './weather.css';
 import WeatherDetail from './weatherDetail';
 import Spinner from './spinner';
-import WeatherCard from './weatherCard';
 
 class App extends Component {
   state = {city: [], forecast: []};
@@ -51,13 +50,16 @@ class App extends Component {
         <SearchBox
           onSubmit={this.onSearchSubmit}/>
         </div>
-        {/* { this.state.forecast.city_name ?  */}
+        { this.state.forecast.city_name ? 
         <div className="weather-city">
-            <WeatherDetail city={this.state.forecast.city_name}/>
+            <WeatherDetail 
+            city={this.state.forecast.city_name}
+            forecast={this.state.forecast}
+            />
         </div>
-        {/* : */}
-          <div></div>
-        {/* } */}
+        :
+        <div></div>
+    }
       </div> 
 
     );
