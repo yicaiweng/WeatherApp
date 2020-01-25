@@ -1,5 +1,6 @@
 .weather-container {
-    padding: 5%;
+    /* padding: 5%; */
+    padding-top: 5%;
     text-align: center;
 }
 
@@ -15,7 +16,7 @@
 /* weather card */
 .weatherCard-container {
     border: 1px solid grey;
-    width: 20%;
+    width: 100%;
     min-height: 20em;
     background: #5F9AE0;
     color: white;
@@ -23,6 +24,12 @@
     float: left;
     display: grid;
     margin-bottom: 10px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.weatherCard-container.expanded {
+    width: 40%
 }
 
 .weatherCard-iconContainer {
