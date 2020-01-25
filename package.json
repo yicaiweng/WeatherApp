@@ -1,12 +1,14 @@
 {
-  "name": "weatherApp",
+  "name": "weather-app",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
+    "dev": "concurrently \"npm run start-ui\" \"nodemon index.js\"",
     "start": "concurrently \"npm run start-ui\" \"node index.js\"",
     "start-server": "node index.js",
-    "start-ui": "npm start --prefix ui"
+    "start-ui": "npm start --prefix ui",
+    "install-all": "npm install && npm install -prefix ui"
   },
   "author": "",
   "license": "ISC",
@@ -16,5 +18,8 @@
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.2"
   }
 }
