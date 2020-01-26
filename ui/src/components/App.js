@@ -17,7 +17,7 @@ class App extends Component {
       city: [],
       forecast: [],
       centerIndex: 2,
-      selectedIndex: null
+      selectedIndex: 0
     };
 
     // This binding is necessary to make `this` work in the callback
@@ -43,7 +43,7 @@ class App extends Component {
 
   incrementCarouselIndex = () => { 
     if (this.state.centerIndex < 13){
-      let newIndex = this.state.centerIndex + 1;
+      let newIndex = this.state.centerIndex + 5;
       this.setState({ centerIndex: newIndex, selectedIndex: null });
     } 
   }
@@ -51,7 +51,7 @@ class App extends Component {
 
   decrementCarouselIndex = () => {
     if (this.state.centerIndex > 2){
-      let newIndex = this.state.centerIndex - 1;
+      let newIndex = this.state.centerIndex - 5;
       this.setState({ centerIndex: newIndex, selectedIndex: null });
     }
   }

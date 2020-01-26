@@ -3,7 +3,7 @@ import WeatherCard from './weatherCard';
 
 const WeatherCarousel = ({ centerIndex, forecasts, selectedIndex, selectCard }) => {
     return (
-        <div className="ui grid centered">
+        <div className="ui sixteen grid center ">
             {forecasts.slice(centerIndex - 2, centerIndex + 3).map((forecast, i) => {
                 return <WeatherCard
                         key={i}
