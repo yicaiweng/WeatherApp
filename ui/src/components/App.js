@@ -3,6 +3,7 @@ import SearchBox from './searchBox';
 import axios from 'axios';
 import './weather.css';
 import WeatherDetail from './weatherDetail';
+import WeatherInfo from './weatherInfo';
 import Spinner from './spinner';
 
 // TODO moved to Redux store:
@@ -17,7 +18,8 @@ class App extends Component {
       city: [],
       forecast: [],
       centerIndex: 2,
-      selectedIndex: 0
+      selectedIndex: 0,
+      forecastInfo: []
     };
 
     // This binding is necessary to make `this` work in the callback
@@ -34,7 +36,13 @@ class App extends Component {
         }
       }).then((response) => {
         console.log('BFF response: ', response)
-        this.setState({ city: response.data.weatherData.city_name, forecast: response.data.weatherData })
+        let tempInfo = response.data.weatherData.data[0];
+        console.log(tempInfo)
+        this.setState({ 
+          city: response.data.weatherData.city_name, 
+          forecast: response.data.weatherData,
+          forecastInfo: tempInfo
+        })
       })
       .catch(err => {
         console.log(err)
@@ -57,9 +65,13 @@ class App extends Component {
   }
 
   selectCard = (index) => { 
+    const tempInfo = Object.assign(this.state.forecast.data[index])
+    this.setState({forecastInfo: tempInfo})
     if(index === this.state.selectedIndex){
       this.setState({ selectedIndex: null })
     } else { this.setState({ selectedIndex: index }) }
+    console.log(this.state.forecastInfo)
+    console.log(this.state.forecast.data[index])
   }
     
 
@@ -84,6 +96,9 @@ class App extends Component {
               incrementCarouselIndex={this.incrementCarouselIndex}
               decrementCarouselIndex={this.decrementCarouselIndex}
               selectCard={this.selectCard}
+            />
+            <WeatherInfo 
+              forecastInfo={this.state.forecastInfo}
             />
         </div>
         :
