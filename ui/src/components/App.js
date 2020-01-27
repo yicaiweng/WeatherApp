@@ -4,6 +4,7 @@ import axios from 'axios';
 import './weather.css';
 import WeatherDetail from './weatherDetail';
 import Spinner from './spinner';
+import Error from './error'
 
 // TODO moved to Redux store:
 // selectedIndex
@@ -17,7 +18,8 @@ class App extends Component {
       city: [],
       forecast: [],
       centerIndex: 2,
-      selectedIndex: 0
+      selectedIndex: 0,
+      error: null
     };
 
     // This binding is necessary to make `this` work in the callback
@@ -37,6 +39,7 @@ class App extends Component {
         this.setState({ city: response.data.weatherData.city_name, forecast: response.data.weatherData })
       })
       .catch(err => {
+        this.setState({error: err})
         console.log(err)
       })
   }
@@ -71,9 +74,18 @@ class App extends Component {
     return (
       <div className="ui container weather-container">
         <div>
-        <SearchBox
-          onSubmit={this.onSearchSubmit}/>
+          <SearchBox
+            onSubmit={this.onSearchSubmit}/>
         </div>
+        
+        { this.state.error ? 
+          <div>
+            <Error errorMessage={this.state.error} />
+          </div>
+          : 
+          <div></div>
+        }
+    
         { this.state.forecast.city_name ? 
         <div className="weather-city">
             <WeatherDetail 

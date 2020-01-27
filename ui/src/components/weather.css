@@ -1,3 +1,7 @@
+.errMessage {
+    color: red;
+    font-size: 18px;
+}
 .weather-container {
     /* padding: 5%; */
     padding-top: 5%;
