@@ -5,6 +5,7 @@ import './weather.css';
 import WeatherDetail from './weatherDetail';
 import WeatherInfo from './weatherInfo';
 import Spinner from './spinner';
+import Error from './error'
 
 // TODO moved to Redux store:
 // selectedIndex
@@ -19,7 +20,9 @@ class App extends Component {
       forecast: [],
       centerIndex: 2,
       selectedIndex: 0,
-      forecastInfo: []
+      error: null,
+      forecastInfo: [],
+      isFahrenheitSelected: false
     };
 
     // This binding is necessary to make `this` work in the callback
@@ -37,7 +40,6 @@ class App extends Component {
       }).then((response) => {
         console.log('BFF response: ', response)
         let tempInfo = response.data.weatherData.data[0];
-        console.log(tempInfo)
         this.setState({ 
           city: response.data.weatherData.city_name, 
           forecast: response.data.weatherData,
@@ -45,6 +47,7 @@ class App extends Component {
         })
       })
       .catch(err => {
+        this.setState({error: err})
         console.log(err)
       })
   }
@@ -70,10 +73,11 @@ class App extends Component {
     if(index === this.state.selectedIndex){
       this.setState({ selectedIndex: null })
     } else { this.setState({ selectedIndex: index }) }
-    console.log(this.state.forecastInfo)
-    console.log(this.state.forecast.data[index])
   }
-    
+  
+  toggleUnit = bol => {
+    this.setState({isFahrenheitSelected: bol})
+  }
 
   renderContent() {
     return <Spinner message="Loading Data"/>
@@ -83,19 +87,30 @@ class App extends Component {
     return (
       <div className="ui container weather-container">
         <div>
-        <SearchBox
-          onSubmit={this.onSearchSubmit}/>
+          <SearchBox
+            onSubmit={this.onSearchSubmit}/>
         </div>
+        
+        { this.state.error ? 
+          <div>
+            <Error errorMessage={this.state.error} />
+          </div>
+          : 
+          <div></div>
+        }
+    
         { this.state.forecast.city_name ? 
         <div className="weather-city">
             <WeatherDetail 
               city={this.state.forecast.city_name}
               forecast={this.state.forecast}
+              isFahrenheitSelected={this.state.isFahrenheitSelected}
               centerIndex={this.state.centerIndex}
               selectedIndex={this.state.selectedIndex}
               incrementCarouselIndex={this.incrementCarouselIndex}
               decrementCarouselIndex={this.decrementCarouselIndex}
               selectCard={this.selectCard}
+              toggleUnit={this.toggleUnit}
             />
             <WeatherInfo 
               forecastInfo={this.state.forecastInfo}

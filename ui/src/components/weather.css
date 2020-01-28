@@ -1,3 +1,7 @@
+.errMessage {
+    color: red;
+    font-size: 18px;
+}
 .weather-container {
     /* padding: 5%; */
     padding-top: 5%;
@@ -73,4 +77,12 @@
 
 .hide.hide {
     display: none;
+}
+
+.ui.button:active, .ui.button:target, .ui.button:focus {
+    background-color: #c0c1c2;
+    background-image: none;
+    -webkit-box-shadow: 0 0 0 1px transparent inset;
+    box-shadow: 0 0 0 1px transparent inset;
+    color: rgba(0,0,0,.95);
 }

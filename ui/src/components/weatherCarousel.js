@@ -1,7 +1,7 @@
 import React from 'react';
 import WeatherCard from './weatherCard';
 
-const WeatherCarousel = ({ centerIndex, forecasts, selectedIndex, selectCard }) => {
+const WeatherCarousel = ({ centerIndex, forecasts, selectedIndex, selectCard, toggleUnit, isFahrenheitSelected }) => {
     return (
         <div className="ui sixteen grid center ">
             {forecasts.slice(centerIndex - 2, centerIndex + 3).map((forecast, i) => {
@@ -11,6 +11,8 @@ const WeatherCarousel = ({ centerIndex, forecasts, selectedIndex, selectCard }) 
                         forecasts={forecast}
                         selectedIndex={selectedIndex}
                         selectCard={selectCard}
+                        toggleUnit={toggleUnit}
+                        isFahrenheitSelected={isFahrenheitSelected}
                     />
             })}
         </div>
