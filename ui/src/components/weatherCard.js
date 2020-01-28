@@ -46,7 +46,7 @@ class WeatherCard extends Component {
 
     render() {
         const forecast = this.props.forecasts;
-        // const sunraise_time = forecast.sunraise_ts.getDate() + forecast.sunraise_ts.getDay();
+        const fahrenheit = forecast.temp * 9 / 5 + 32;
         return(
             <div className={this.props.selectedIndex === this.props.index ? "four wide column" : "three wide column"}>
                 <div
@@ -61,7 +61,7 @@ class WeatherCard extends Component {
                         <img src={require(`../assets/${forecast.weather.icon}.png`)} alt="weatherIcon" />
                     </div>
                     <div className="weatherCard-temp">
-                        {forecast.temp}°
+                        {this.props.isFahrenheitSelected ? fahrenheit+ "F°" : forecast.temp + 'C°'}
                     </div>
                     <div className="weatherCard-pop">
                         <img className="icon" src={raindrop} alt="raindrop" />

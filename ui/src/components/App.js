@@ -21,7 +21,8 @@ class App extends Component {
       centerIndex: 2,
       selectedIndex: 0,
       error: null,
-      forecastInfo: []
+      forecastInfo: [],
+      isFahrenheitSelected: false
     };
 
     // This binding is necessary to make `this` work in the callback
@@ -39,7 +40,6 @@ class App extends Component {
       }).then((response) => {
         console.log('BFF response: ', response)
         let tempInfo = response.data.weatherData.data[0];
-        console.log(tempInfo)
         this.setState({ 
           city: response.data.weatherData.city_name, 
           forecast: response.data.weatherData,
@@ -73,10 +73,11 @@ class App extends Component {
     if(index === this.state.selectedIndex){
       this.setState({ selectedIndex: null })
     } else { this.setState({ selectedIndex: index }) }
-    console.log(this.state.forecastInfo)
-    console.log(this.state.forecast.data[index])
   }
-    
+  
+  toggleUnit = bol => {
+    this.setState({isFahrenheitSelected: bol})
+  }
 
   renderContent() {
     return <Spinner message="Loading Data"/>
@@ -103,11 +104,13 @@ class App extends Component {
             <WeatherDetail 
               city={this.state.forecast.city_name}
               forecast={this.state.forecast}
+              isFahrenheitSelected={this.state.isFahrenheitSelected}
               centerIndex={this.state.centerIndex}
               selectedIndex={this.state.selectedIndex}
               incrementCarouselIndex={this.incrementCarouselIndex}
               decrementCarouselIndex={this.decrementCarouselIndex}
               selectCard={this.selectCard}
+              toggleUnit={this.toggleUnit}
             />
             <WeatherInfo 
               forecastInfo={this.state.forecastInfo}

@@ -11,10 +11,8 @@ import humidity from '../assets/humidity.png';
 const WeatherInfo = (props) => {
     let sunraiseDate = new Date(props.forecastInfo.sunrise_ts * 1000);
     sunraiseDate = sunraiseDate.getHours() + ':' + sunraiseDate.getMinutes() + 'am';
-    console.log(sunraiseDate);
     let sunsetDate = new Date(props.forecastInfo.sunset_ts * 1000);
     sunsetDate = sunsetDate.getHours() + ':' + sunsetDate.getMinutes() + "pm";
-    console.log(sunraise)
     return(
         <div className="weatherCard-detail ui grid">
             <div className="sixteen wide column">
