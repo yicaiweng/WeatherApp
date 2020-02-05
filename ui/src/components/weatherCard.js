@@ -46,7 +46,7 @@ class WeatherCard extends Component {
 
     render() {
         const forecast = this.props.forecasts;
-        const fahrenheit = forecast.temp * 9 / 5 + 32;
+        const fahrenheit = (forecast.temp * 9 / 5 + 32).toFixed(1);
         return(
             <div className={this.props.selectedIndex === this.props.index ? "four wide column" : "three wide column"}>
                 <div
