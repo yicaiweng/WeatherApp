@@ -6,6 +6,7 @@ import WeatherDetail from './weatherDetail';
 import WeatherInfo from './weatherInfo';
 import Spinner from './spinner';
 import Error from './error'
+import thunder from '../assets/drizzle.gif'
 
 // TODO moved to Redux store:
 // selectedIndex
@@ -22,7 +23,8 @@ class App extends Component {
       selectedIndex: 0,
       error: null,
       forecastInfo: [],
-      isFahrenheitSelected: false
+      isFahrenheitSelected: false,
+      weatherStatus: null
     };
 
     // This binding is necessary to make `this` work in the callback
@@ -43,8 +45,10 @@ class App extends Component {
         this.setState({ 
           city: response.data.weatherData.city_name, 
           forecast: response.data.weatherData,
-          forecastInfo: tempInfo
+          forecastInfo: tempInfo,
+          weatherStatus: tempInfo.weather.code
         })
+        console.log(this.state.weatherStatus)
       })
       .catch(err => {
         this.setState({error: err})
@@ -85,7 +89,7 @@ class App extends Component {
 
   render() {
     return (
-      <div className={'ui weather-container' + (this.state.forecast.city_name ? "1": "0")}>
+      <div className={'ui ' + (this.state.weatherStatus ? 'weather-container' + this.state.weatherStatus : 'weather-container0')}>
         <div>
           <SearchBox
             onSubmit={this.onSearchSubmit}/>
