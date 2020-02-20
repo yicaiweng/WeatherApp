@@ -85,7 +85,7 @@ class App extends Component {
 
   render() {
     return (
-      <div className="ui container weather-container">
+      <div className={'ui weather-container' + (this.state.forecast.city_name ? "1": "0")}>
         <div>
           <SearchBox
             onSubmit={this.onSearchSubmit}/>

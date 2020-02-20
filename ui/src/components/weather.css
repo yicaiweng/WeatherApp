@@ -2,10 +2,20 @@
     color: red;
     font-size: 18px;
 }
-.weather-container {
-    /* padding: 5%; */
-    padding-top: 5%;
+
+.weather-container1 {
+    padding: 5%;
     text-align: center;
+    background-image: url('../assets/raining.gif');
+    background-repeat: no-repeat;
+    background-size: cover;
+    color: white;
+}
+
+.weather-container0 {
+    padding: 5%;
+    text-align: center;
+    color: white;
 }
 
 .weather-input {
@@ -33,7 +43,8 @@
 }
 
 .weatherCard-container.expanded {
-    width: 40%
+    width: 40%;
+    height: 20em;
 }
 
 .weatherCard-iconContainer {
@@ -73,6 +84,7 @@
 
 .weather-icon {
     width: 30px;
+    filter: invert(90%);
 }
 
 .hide.hide {
