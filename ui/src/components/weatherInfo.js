@@ -37,7 +37,7 @@ const WeatherInfo = (props) => {
                                 <img className="weather-icon" src={humidity} alt="wind icon"/>
                                 </span>
                                 <span>
-                                    <b>>Humidity</b>
+                                    <b>Humidity</b>
                                 </span>
                             </div>
                             <p>{props.forecastInfo.rh}</p>
